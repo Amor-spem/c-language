@@ -159,7 +159,6 @@ int main()
 			system("pause");
 			return 0;
 			break;
-
 		default:
 			break;
 		}
