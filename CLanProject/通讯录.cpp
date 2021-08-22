@@ -18,7 +18,6 @@ void showMenu()
 	cout << "**********************" << endl;
 }
 
-
 //联系人的结构体
 struct Person
 {
@@ -34,7 +33,6 @@ struct Person
 	string m_Addr;
 };
 
-
 //通讯录结构体
 struct Addressbooks
 {
@@ -45,8 +43,45 @@ struct Addressbooks
 	int m_Size;
 };
 
-//1.添加联系人
-//传入结构体指针
+//0.1添加联系人
+void addonePerson(Addressbooks* abs, int i) {
+	//姓名
+	string name;
+	cout << "请输入姓名:" << endl;
+	cin >> name;
+	abs->presonArray[i].m_Name = name;
+	//性别
+	int sex;
+	cout << "请输入性别:（男输入1，女输入0）" << endl;
+	while (true)
+	{
+		cin >> sex;
+		if (sex == 1 || sex == 0)
+		{
+			abs->presonArray[i].m_Sex = sex;
+			break;
+		}
+		cout << "重新输入！！（男输入1，女输入0）" << endl;
+	}
+	abs->presonArray[i].m_Sex = sex;
+	//年龄
+	int age;
+	cout << "请输入年龄" << endl;
+	cin >> age;
+	abs->presonArray[i].m_Age = age;
+	//电话
+	string phone;
+	cout << "请输入电话号码" << endl;
+	cin >> phone;
+	abs->presonArray[i].m_Phone = phone;
+	//住址
+	string addr;
+	cout << "请输入地址" << endl;
+	cin >> addr;
+	abs->presonArray[i].m_Addr = addr;
+}
+
+//1.添加联系人|传入结构体指针
 void addPerson(Addressbooks* abs)
 {
 	//判断通讯录是否到达上限,满了就不再添加
@@ -58,40 +93,7 @@ void addPerson(Addressbooks* abs)
 	else
 	{
 		//添加具体联系人
-		//姓名
-		string name;
-		cout << "请输入姓名:" << endl;
-		cin >> name;
-		abs->presonArray[abs->m_Size].m_Name = name;
-		//性别
-		int sex;
-		cout << "请输入性别:（男输入1，女输入0）" << endl;
-		while (true)
-		{
-			cin >> sex;
-			if (sex == 1 || sex == 0)
-			{
-				abs->presonArray[abs->m_Size].m_Sex = sex;
-				break;
-			}
-			cout << "重新输入！！（男输入1，女输入0）" << endl;
-		}
-		abs->presonArray[abs->m_Size].m_Sex = sex;
-		//年龄
-		int age;
-		cout << "请输入年龄" << endl;
-		cin >> age;
-		abs->presonArray[abs->m_Size].m_Age = age;
-		//电话
-		string phone;
-		cout << "请输入电话号码" << endl;
-		cin >> phone;
-		abs->presonArray[abs->m_Size].m_Phone = phone;
-		//住址
-		string addr;
-		cout << "请输入地址" << endl;
-		cin >> addr;
-		abs->presonArray[abs->m_Size].m_Addr = addr;
+		addonePerson(abs, abs->m_Size);
 		//更新通讯录人数
 		abs->m_Size++;
 		cout << "添加成功" << endl;
@@ -137,6 +139,7 @@ int isExist(Addressbooks* abs, string name) {
 	}
 	return -1;
 };
+
 // 3.删除联系人
 void deletePerson(Addressbooks* abs) {
 	cout << "请输入删除人姓名:" << endl;
@@ -173,6 +176,24 @@ void findPerson(Addressbooks* abs) {
 	system("pause");
 	system("cls");
 };
+
+// 5.修改联系人
+void alterPerson(Addressbooks* abs) {
+	cout << "请输入要修改人姓名" << endl;
+	string name;
+	cin >> name;
+	if (isExist(abs,name) == -1) {
+		cout << "查无此人" << endl;
+	}
+	else
+	{
+		addonePerson(abs, isExist(abs, name));
+	};
+	system("pause");
+	system("cls");
+}
+
+//主函数
 int main()
 {
 	//创建一个通讯录的结构体变量
@@ -202,8 +223,13 @@ int main()
 			findPerson(&abs);
 			break;
 		case 5://修改联系人
+			alterPerson(&abs);
 			break;
 		case 6://清空联系人
+			abs.m_Size = 0;
+			cout << "已经清空" << endl;
+			system("pause");
+			system("cls");
 			break;
 		case 0://退出通讯录
 			cout << "欢迎下次使用" << endl;
@@ -211,7 +237,9 @@ int main()
 			return 0;
 			break;
 		default:
-			break;
+			cout << "输入有误重新输入" << endl;
+			system("pause");
+			system("cls");
 		}
 	}
 	system("pause");
