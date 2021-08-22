@@ -100,6 +100,15 @@ void addPerson(Addressbooks* abs)
 	}
 };
 
+//1.1显示联系人
+void onePerson(Addressbooks* abs, int i) {
+	cout << "姓名：" << abs->presonArray[i].m_Name << "\t";
+	cout << "性别：" << (abs->presonArray[i].m_Sex == 1 ? "男" : "女") << "\t";
+	cout << "年龄：" << abs->presonArray[i].m_Age << "\t";
+	cout << "电话：" << abs->presonArray[i].m_Phone << "\t";
+	cout << "地址：" << abs->presonArray[i].m_Addr << endl;
+}
+
 //2.显示所有联系人
 void showPerson(Addressbooks* abs)
 {
@@ -111,13 +120,8 @@ void showPerson(Addressbooks* abs)
 	{
 		for (int i = 0; i < (abs->m_Size); i++)
 		{
-
-			cout << "姓名：" << abs->presonArray[i].m_Name << "\t";
-			cout << "性别：" << (abs->presonArray[i].m_Sex == 1 ? "男":"女") << "\t";
-			cout << "年龄：" << abs->presonArray[i].m_Age << "\t";
-			cout << "电话：" << abs->presonArray[i].m_Phone << "\t";
-			cout << "地址：" << abs->presonArray[i].m_Addr << endl;
-		}
+			onePerson(abs, i);
+		};
 		system("pause");
 		system("cls");
 	}
@@ -138,7 +142,7 @@ void deletePerson(Addressbooks* abs) {
 	cout << "请输入删除人姓名:" << endl;
 	string name;
 	cin >> name;
-	if (isExist(abs, name)==-1) {
+	if (isExist(abs, name) == -1) {
 		cout << "查无此人" << endl;
 	}
 	else
@@ -152,8 +156,22 @@ void deletePerson(Addressbooks* abs) {
 	}
 	system("pause");
 	system("cls");
-}
+};
 
+// 4.查找联系人
+//void findPerson(Addressbooks* abs) {
+//	cout << "请输入查找人姓名:" << endl;
+//	string name;
+//	cin >> name;
+//	for (int i = 0; i < abs->m_Size; i++)
+//	{
+//		if (abs->presonArray[i] == name)
+//		{
+//			cout << ""
+//		};
+//
+//	}
+//};
 int main()
 {
 	//创建一个通讯录的结构体变量
