@@ -122,9 +122,9 @@ void showPerson(Addressbooks* abs)
 		{
 			onePerson(abs, i);
 		};
-		system("pause");
-		system("cls");
-	}
+	};
+	system("pause");
+	system("cls");
 };
 
 // 2.1 判断联系人是否存在，存在返回联系人所在位置，不存在返回-1
@@ -159,19 +159,20 @@ void deletePerson(Addressbooks* abs) {
 };
 
 // 4.查找联系人
-//void findPerson(Addressbooks* abs) {
-//	cout << "请输入查找人姓名:" << endl;
-//	string name;
-//	cin >> name;
-//	for (int i = 0; i < abs->m_Size; i++)
-//	{
-//		if (abs->presonArray[i] == name)
-//		{
-//			cout << ""
-//		};
-//
-//	}
-//};
+void findPerson(Addressbooks* abs) {
+	cout << "请输入查找人姓名:" << endl;
+	string name;
+	cin >> name;
+	if (isExist(abs, name) == -1) {
+		cout << "查无此人" << endl;
+	}
+	else
+	{
+		onePerson(abs, isExist(abs, name));
+	};
+	system("pause");
+	system("cls");
+};
 int main()
 {
 	//创建一个通讯录的结构体变量
@@ -198,6 +199,7 @@ int main()
 			deletePerson(&abs);
 			break;
 		case 4://查找联系人
+			findPerson(&abs);
 			break;
 		case 5://修改联系人
 			break;
